@@ -129,6 +129,7 @@
 
 <script>
   var actionUrl = '{{ url('pasien') }}';
+  var actionPrint = '{{ url('print') }}';
   var apiUrl = '{{ url('api/pasien') }}';
 
   var columns = [
@@ -138,13 +139,16 @@
     {data: 'no_telp', class: 'text-center', orderable: true },
     {data: 'rt', class: 'text-center', orderable: true },
     {data: 'rw', class: 'text-center', orderable: true },
-    {data: 'name', class: 'text-center', orderable: true },
+    {data: 'kelurahan_id', class: 'text-center', orderable: true },
     {data: 'tanggal_lahir', class: 'text-center', orderable: true },
     {data: 'jenis_kelamin', class: 'text-center', orderable: true },
     {render: function(index, row, data, meta ){
       return `
         <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
-        Edit
+        Edit</a>
+        <a href="${actionPrint}/${data.id}" class="btn btn-success btn-sm">
+        <i class="fa fa-print" aria-hidden="true"></i>
+        Print
                 </a>
         <a href="#" class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
                 Delete</a>

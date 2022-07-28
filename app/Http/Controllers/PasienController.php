@@ -6,6 +6,7 @@ use App\Models\Pasien;
 use Illuminate\Http\Request;
 use App\Models\Kelurahan;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use PDF;
 class PasienController extends Controller
 {
     /**
@@ -39,7 +40,7 @@ class PasienController extends Controller
     public function store(Request $request)
     {
         //
-        $id = IdGenerator::generate(['table' => 'pasiens', 'length' => 10, 'prefix' => date('ym')]);
+        
 
         $this->validate($request,[
             'nama_pasien'=>'required',
@@ -53,11 +54,13 @@ class PasienController extends Controller
            
         ]);
 
+        $id = IdGenerator::generate(['table' => 'pasiens', 'length' => 10, 'prefix' => date('ym')]);
+        // dd($id);
         $pasien = new Pasien();
         $pasien->nama_pasien = $request->nama_pasien;
         $pasien->alamat = $request->alamat;
         $pasien->no_telp = $request->no_telp;
-        $pasien->id = $request->$id;
+        $pasien->id = $id;
         $pasien->rt = $request->rt;
         $pasien->rw = $request->rw;
         $pasien->kelurahan_id = $request->kelurahan_id;
@@ -77,6 +80,17 @@ class PasienController extends Controller
         //
 
     }
+
+     public function print(Pasien $pasien)
+    {
+        //
+
+        $pdf = PDF::loadView('pasien.print', ["pasiens" => [$pasien]]);
+        $pdf->setPaper('A4', '');
+        return $pdf->stream($pasien->nama_pasien . "_" . $pasien->nama_pasien . "-" . str_pad($pasien->id + 1, 4, '0', STR_PAD_LEFT) . '.pdf');
+
+    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -24,6 +24,7 @@ Route::resource('/kelurahan',App\Http\Controllers\KelurahanController::class);
 Route::get('api/kelurahan',[App\Http\Controllers\KelurahanController::class,'apikelurahan']);
 Route::resource('/pasien',App\Http\Controllers\PasienController::class);
 Route::get('api/pasien',[App\Http\Controllers\PasienController::class,'apipasien']);
+Route::get('print/{pasien}',[App\Http\Controllers\PasienController::class,'print']);
 Auth::routes();
 
 
