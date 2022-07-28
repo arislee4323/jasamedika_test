@@ -16,7 +16,7 @@
 <div id="controller">
     <div class="card">
     <div class="card-header">
-      <a href="#" @click="addData()" class="btn btn-primary btn-sm pull-right">+ Create New Kelurahan</a>
+      <a href="#" @click="addData()" class="btn btn-primary btn-sm pull-right">+ Create New Pasien</a>
     </div>
   
     <!-- /.card-header -->
@@ -88,7 +88,11 @@
                   </div>
                   <div class="form-group">
                     <label>Jenis Kelamin</label>
-                    <input type="text" name="jenis_kelamin" :value="data.jenis_kelamin" class="form-control" placeholder="Input title" required="">
+                     <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
+                      <option :selected="data.jenis_kelamin" value="">--Pilih Gender--</option>
+                       <option :selected="data.jenis_kelamin" value="Pria">Pria</option>
+                       <option :selected="data.jenis_kelamin" value="Wanita">Wanita</option>
+                   </select>
                   </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -139,7 +143,7 @@
     {data: 'no_telp', class: 'text-center', orderable: true },
     {data: 'rt', class: 'text-center', orderable: true },
     {data: 'rw', class: 'text-center', orderable: true },
-    {data: 'kelurahan_id', class: 'text-center', orderable: true },
+    {data: 'name', class: 'text-center', orderable: true },
     {data: 'tanggal_lahir', class: 'text-center', orderable: true },
     {data: 'jenis_kelamin', class: 'text-center', orderable: true },
     {render: function(index, row, data, meta ){

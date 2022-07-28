@@ -79,21 +79,22 @@
     @foreach ($pasiens as $pasien)
     <div>
         <div class="main">
-            <img class="background-image" src="{{public_path('images/abc.png')}}" alt="">
+            <img class="background-image" src="{{public_path('images/data.jpg')}}" alt="">
             <div class="main-data">
                 <div class="left-div" style="font-size:15px; line-height: 1.5;">
-                    <img class="logo" src="{{public_path('images/.png')}}" width="110" alt="">
+                    <img class="logo" src="{{public_path('images/jasamedika.png')}}" width="110" alt="">
                     <div class="info">
-                        <span class="capitalize">{{$pasien->nama_pasien. " " . $pasien->nama_pasien}}</span><br>
-                        <span class="text-md">{{$pasien->alamat}}</span><br>
-                        <span class="text-md">ID: {{str_pad($pasien->id+1, 4, '0', STR_PAD_LEFT)}}</span><br>
-                        <span class="text-md">Batch: {{$pasien->batch}}</span><br>
-                        <span class="text-md">Section: {{$pasien->section}}</span><br>
+                        <span class="text-md">ID: {{$pasien->id}}</span><br>
+                        <span class="text-md">Nama: {{$pasien->nama_pasien}}</span><br>
+                        <span class="text-md">Alamat: {{$pasien->alamat}}</span><br>
+                        <span class="text-md">RT: {{$pasien->rt}}</span> <span class="text-md">RW: {{$pasien->rw}}</span><br>
+                        <span class="text-md">Kelurahan: {{$pasien->kelurahan->nama_kelurahan}}</span><br>
+                        
                     </div>
                 </div>
                 <div class="right-div" style="padding-left: 50px">
                     <img style="height: 80px; margin-left:15px;; margin-top:25px;"
-                        src="{{public_path('pasiens/images/' . $pasien->image)}}" alt="" width="75">
+                        src="{{public_path('images/admin-2.jpg')}}" alt="" width="75">
                     <div class="flex items-center" style="margin-top: 10px;">
                         <span style="position: absulate;">
                             <img src="{{public_path('images/call.png')}}"
@@ -103,12 +104,12 @@
                     </div>
                     <div class="flex items-center">
                         <span style="position: absulate;">
-                            <img src="{{public_path('images/blood-drop.png')}}"
-                                style="position: absulate; color: black; width: 12px;" alt="">
+                            <img src="{{public_path('images/gender.jpg')}}"
+                                style="position: absulate; color: black; width: 20px;" alt="">
                         </span>
-                        <span class="text-xs ml-2" style="font-size: 13px;">{{$pasien->kelurahan_id}}</span>
+                        <span class="text-xs ml-2" style="font-size: 15px;">{{$pasien->jenis_kelamin}}</span>
                     </div>
-                    <img class="mx-auto" src="{{public_path('images/sign.png')}}" alt="" width="45"
+                    <img class="mx-auto" src="{{public_path('images/sign.png')}}" alt="" width="60"
                         style="margin-left:20px; margin-top: 5px;">
                    
                 </div>

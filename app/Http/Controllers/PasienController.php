@@ -84,10 +84,10 @@ class PasienController extends Controller
      public function print(Pasien $pasien)
     {
         //
-
+        
         $pdf = PDF::loadView('pasien.print', ["pasiens" => [$pasien]]);
         $pdf->setPaper('A4', '');
-        return $pdf->stream($pasien->nama_pasien . "_" . $pasien->nama_pasien . "-" . str_pad($pasien->id + 1, 4, '0', STR_PAD_LEFT) . '.pdf');
+        return $pdf->stream($pasien->nama_pasien . '.pdf');
 
     }
 
@@ -107,7 +107,12 @@ class PasienController extends Controller
     public function apipasien(Request $request)
     {
         $pasiens = Pasien::all();
-        $datatables = datatables()->of($pasiens)->addIndexColumn();
+        $datatables = datatables()->of($pasiens)
+        ->addColumn('name', function($pasien) {
+            $name = $pasien->kelurahan->nama_kelurahan;
+            return $name;
+        })
+        ->addIndexColumn();
 
         return $datatables->make(true);
     }
