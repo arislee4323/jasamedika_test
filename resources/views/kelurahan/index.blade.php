@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('header', 'Data User')
+@section('header', 'Data Kelurahan')
 @section('content')
 @section('css')
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -51,15 +51,15 @@
                     <input type="hidden" name="_method" value="PUT" v-if="editStatus">
                    <div class="form-group">
                     <label>Nama Kelurahan</label>
-                    <input type="text" name="nama_kelurahan" :value="data.nama_kelurahan" class="form-control" placeholder="Input title" required="">
+                    <input type="text" name="nama_kelurahan" :value="data.nama_kelurahan" class="form-control" placeholder="Input Kelurahan" required="">
                   </div>
                   <div class="form-group">
                     <label>Nama Kecamatan</label>
-                    <input type="text" name="nama_kecamatan" :value="data.nama_kecamatan" class="form-control" placeholder="Input title" required="">
+                    <input type="text" name="nama_kecamatan" :value="data.nama_kecamatan" class="form-control" placeholder="Input Kecamatan" required="">
                   </div>
                   <div class="form-group">
                     <label>Nama Kota</label>
-                    <input type="text" name="nama_kota" :value="data.nama_kota" class="form-control" placeholder="Input title" required="">
+                    <input type="text" name="nama_kota" :value="data.nama_kota" class="form-control" placeholder="Input Kota" required="">
                   </div>
                   
                 <div class="modal-footer justify-content-between">

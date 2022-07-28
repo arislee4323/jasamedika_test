@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Id Card</title>
+    <title>ID Card</title>
     <style>
         .page-break {
             page-break-after: always;
@@ -93,8 +93,14 @@
                     </div>
                 </div>
                 <div class="right-div" style="padding-left: 50px">
+                    @if($pasien->jenis_kelamin == 'Pria')
                     <img style="height: 80px; margin-left:15px;; margin-top:25px;"
                         src="{{public_path('images/admin-2.jpg')}}" alt="" width="75">
+                    @endif
+                    @if($pasien->jenis_kelamin == 'Wanita')
+                    <img style="height: 80px; margin-left:15px;; margin-top:25px;"
+                        src="{{public_path('images/admin-3.png')}}" alt="" width="75">
+                    @endif
                     <div class="flex items-center" style="margin-top: 10px;">
                         <span style="position: absulate;">
                             <img src="{{public_path('images/call.png')}}"

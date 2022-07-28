@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('header', 'Data Pasien')
+@section('header', 'Data User')
 @section('content')
 @section('css')
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,23 +16,17 @@
 <div id="controller">
     <div class="card">
     <div class="card-header">
-      <a href="#" @click="addData()" class="btn btn-primary btn-sm pull-right">+ Create New Pasien</a>
+      <a href="#" @click="addData()" class="btn btn-primary btn-sm pull-right">+ Create New User</a>
     </div>
-  
     <!-- /.card-header -->
     <div class="card-body">
       <table id="datatables" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>No</th>
-          <th>Nama Pasien</th>
-          <th>Alamat</th>
-          <th>No Telepon</th>
-          <th>RT</th>
-          <th>RW</th>
-          <th>Kelurahan</th>
-          <th>Tanggal Lahir</th>
-          <th>Jenis Kelamin</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Jabatan</th>
           <th>Action</th>
         </tr>
         </thead>
@@ -55,44 +49,29 @@
                     @csrf
                     <input type="hidden" name="_method" value="PUT" v-if="editStatus">
                    <div class="form-group">
-                    <label>Nama Pasien</label>
-                    <input type="text" name="nama_pasien" :value="data.nama_pasien" class="form-control" placeholder="Input Nama Pasien" required="">
+                    <label>Name</label>
+                    <input type="text" name="name" :value="data.name" class="form-control" placeholder="Input Name" required="">
                   </div>
                   <div class="form-group">
-                    <label>Alamat</label>
-                    <input type="text" name="alamat" :value="data.alamat" class="form-control" placeholder="Input Alamat" required="">
+                    <label>Email</label>
+                    <input type="email" name="email" :value="data.email" class="form-control" placeholder="Input Email" required="">
                   </div>
                   <div class="form-group">
-                    <label>No Telepon</label>
-                    <input type="number" name="no_telp" :value="data.no_telp" class="form-control" placeholder="Input Nomor Telepon" required="">
+                    <label>Password</label>
+                    <input type="password" name="password"  :value="data.password" class="form-control" placeholder="Input Password" required="">
                   </div>
                   <div class="form-group">
-                    <label>RT</label>
-                    <input type="number" name="rt" :value="data.rt" class="form-control" placeholder="Input RT" required="">
+                    <label>Konfirmasi Password</label>
+                    <input type="password" name="password_confirmation" :value="data.password" class="form-control" placeholder="Input Password" required="">
+                    
                   </div>
-                  <div class="form-group">
-                    <label>RW</label>
-                    <input type="number" name="rw" :value="data.rw" class="form-control" placeholder="Input RW" required="">
-                  </div>
-                 <div class="form-group">
-                          <label>Kelurahan</label>
-                         <select name="kelurahan_id" class="form-control">
-                          @foreach($kelurahans as $kelurahan)
-                          <option :selected="data.kelurahan_id == {{ $kelurahan->id }}" value="{{ $kelurahan->id }}">{{ $kelurahan->nama_kelurahan }}</option>
-                          @endforeach
-                         </select>
-                      </div>
-                  <div class="form-group">
-                    <label>Tanggal Lahir</label>
-                    <input type="date" name="tanggal_lahir" :value="data.tanggal_lahir" class="form-control" required="">
-                  </div>
-                  <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                     <select class="form-control"  name="jenis_kelamin" :value="data.jenis_kelamin">
-                      <option value="">--Pilih Gender--</option>
-                       <option value="Pria">Pria</option>
-                       <option value="Wanita">Wanita</option>
-                   </select>
+                   <div class="form-group">
+                    <label>Jabatan</label>
+                    <select name="role" :value="data.role" class="form-control">
+                      <option value="">--Pilih Jabatan--</option>
+                       <option value="admin">Admin</option> 
+                       <option value="operator">Operator</option>  
+                    </select>
                   </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -132,27 +111,18 @@
 <!-- Page specific script -->
 
 <script>
-  var actionUrl = '{{ url('pasien') }}';
-  var actionPrint = '{{ url('print') }}';
-  var apiUrl = '{{ url('api/pasien') }}';
+  var actionUrl = '{{ url('user') }}';
+  var apiUrl = '{{ url('api/user') }}';
 
   var columns = [
     {data: 'DT_RowIndex', class: 'text-center', orderable: true },
-    {data: 'nama_pasien', class: 'text-center', orderable: true },
-    {data: 'alamat', class: 'text-center', orderable: true },
-    {data: 'no_telp', class: 'text-center', orderable: true },
-    {data: 'rt', class: 'text-center', orderable: true },
-    {data: 'rw', class: 'text-center', orderable: true },
     {data: 'name', class: 'text-center', orderable: true },
-    {data: 'tanggal_lahir', class: 'text-center', orderable: true },
-    {data: 'jenis_kelamin', class: 'text-center', orderable: true },
+    {data: 'email', class: 'text-center', orderable: true },
+    {data: 'role', class: 'text-center', orderable: true },
     {render: function(index, row, data, meta ){
       return `
         <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
-        Edit</a>
-        <a href="${actionPrint}/${data.id}" class="btn btn-success btn-sm">
-        <i class="fa fa-print" aria-hidden="true"></i>
-        Print
+        Edit
                 </a>
         <a href="#" class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
                 Delete</a>
@@ -186,35 +156,35 @@
             _this.datas = _this.table.ajax.json().data;
           });
         },
-         addData() {
-          this.data = {};
-          this.actionUrl = '{{ url('pasien') }}';
-          $('#modal-default').modal();
-          editStatus: false;
-         },
-         editData(event, row){
-          this.data = this.datas[row];
-          this.editStatus = true;
-          $('#modal-default').modal();
-         },
-         deleteData(event, id) {
-              if (confirm("Are you sure ?")) {
-                  $(event.target).parents('tr').remove();
-                      axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
-                      // location.reload();
-                      alert('Data has been removed');
-              });
-          }
-       },
-         submitForm(event, id){
-          event.preventDefault();
-          const _this = this;
-          var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl+'/'+id;
-          axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
-              $('#modal-default').modal('hide');
-              _this.table.ajax.reload();
-          });
-         },
+               addData() {
+                this.data = {};
+                this.actionUrl = '{{ url('user') }}';
+                $('#modal-default').modal();
+                editStatus: false;
+               },
+               editData(event, row){
+                this.data = this.datas[row];
+                this.editStatus = true;
+                $('#modal-default').modal();
+               },
+               deleteData(event, id) {
+                    if (confirm("Are you sure ?")) {
+                        $(event.target).parents('tr').remove();
+                            axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
+                            // location.reload();
+                            alert('Data has been removed');
+                    });
+                }
+             },
+               submitForm(event, id){
+                event.preventDefault();
+                const _this = this;
+                var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl+'/'+id;
+                axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                    $('#modal-default').modal('hide');
+                    _this.table.ajax.reload();
+                });
+               },
       }
     });
  

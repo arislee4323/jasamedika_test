@@ -130,7 +130,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/home')}}" class="brand-link">
-      <span class="brand-text font-weight-light">Kasir</span>
+      <span class="brand-text font-weight-light">Jasamedika</span>
     </a>
 
     <!-- Sidebar -->
@@ -152,21 +152,30 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-         
+         @if(auth()->user()->role == 'admin')
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('user') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{ url('kelurahan') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kelurahan</p>
                 </a>
               </li>
+          @endif
+          @if(auth()->user()->role == 'operator')
               <li class="nav-item">
                 <a href="{{ url('pasien') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pasien</p>
                 </a>
               </li>
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
